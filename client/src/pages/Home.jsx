@@ -285,7 +285,15 @@ export default function Home() {
           Each night of Navratri honors a different form of the Goddess — nine colors, nine
           energies, one celebration.
         </p>
-        <div className="nights-row">
+        <div
+          className="nights-row"
+          onWheel={(e) => {
+            if (Math.abs(e.deltaY) > Math.abs(e.deltaX)) {
+              e.currentTarget.scrollLeft += e.deltaY;
+              e.preventDefault();
+            }
+          }}
+        >
           {NINE_NIGHTS.map((night, i) => (
             <button
               key={night.n}

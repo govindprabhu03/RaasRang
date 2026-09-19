@@ -1979,6 +1979,8 @@ body {
   overflow-x: auto;
   padding-bottom: 0.5rem;
   scrollbar-width: none;
+  mask-image: linear-gradient(90deg, black calc(100% - 48px), transparent 100%);
+  -webkit-mask-image: linear-gradient(90deg, black calc(100% - 48px), transparent 100%);
 }
 
 .nights-row::-webkit-scrollbar {
