@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import { EVENT } from "../eventConfig";
 import { useSiteContent } from "../SiteContentContext";
 import logo from "../assets/logo-nav.png";
+import cultEventsLogo from "../assets/cult-events-logo.jpg";
 
 export default function Footer() {
   const { settings } = useSiteContent();
@@ -54,6 +55,10 @@ export default function Footer() {
       </div>
       <p className="footer-copy">
         © {EVENT.year} {EVENT.name}. All rights reserved.
+      </p>
+      <p className="footer-presenter-row">
+        <img src={cultEventsLogo} alt="Cult Events" className="footer-presenter-badge" />
+        An event by <span className="footer-presenter">Cult Events</span>
       </p>
     </footer>
   );

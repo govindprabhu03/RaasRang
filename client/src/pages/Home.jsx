@@ -3,7 +3,8 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 import { EVENT } from "../eventConfig";
 import { useSiteContent } from "../SiteContentContext";
-import CinematicIntro from "../sections/CinematicIntro";
+import raasRangCrest from "../assets/logo-nav.png";
+import cultEventsLogo from "../assets/cult-events-logo.jpg";
 
 const API_BASE = import.meta.env.VITE_API_BASE || "";
 
@@ -137,6 +138,23 @@ function EventShowcase({ settings }) {
   );
 }
 
+const MARQUEE_ITEMS = ["Garba", "Dandiya", "Navratri 2026", "Nine Nights", "Raas Rang"];
+
+function Marquee() {
+  const items = [...MARQUEE_ITEMS, ...MARQUEE_ITEMS];
+  return (
+    <div className="marquee" aria-hidden="true">
+      <div className="marquee-track">
+        {items.map((label, i) => (
+          <span className="marquee-item" key={i}>
+            {label} <i>✦</i>
+          </span>
+        ))}
+      </div>
+    </div>
+  );
+}
+
 function GarbaCircle() {
   const sticks = Array.from({ length: 16 });
   return (
@@ -163,7 +181,35 @@ export default function Home() {
 
   return (
     <div>
-      <CinematicIntro photos={galleryImages} />
+      <section className="hero-glass">
+        <div className="hero-glass-card">
+          <img src={raasRangCrest} alt="Raas Rang crest" className="hero-crest" />
+          <p className="presenter-credit">
+            <img src={cultEventsLogo} alt="Cult Events" className="presenter-badge" />
+            Cult Events presents
+          </p>
+          <p className="eyebrow">Garba · Dandiya · Navratri 2026</p>
+          <h1>
+            Raas Rang <i>2026</i>
+          </h1>
+          <p className="lede">{settings.tagline}</p>
+          <div className="hero-actions">
+            <Link to="/tickets" className="btn btn-primary">
+              Book Your Pass <span>→</span>
+            </Link>
+            <Link to="/gallery" className="btn btn-outline">
+              See Last Year
+            </Link>
+          </div>
+          <div className="hero-meta">
+            <span>{settings.date_label}</span>
+            <span className="dot" />
+            <span>{settings.venue}</span>
+          </div>
+        </div>
+      </section>
+
+      <Marquee />
 
       <section className="intro section">
         <p className="eyebrow">An evening with intention</p>
@@ -239,25 +285,24 @@ export default function Home() {
           Each night of Navratri honors a different form of the Goddess — nine colors, nine
           energies, one celebration.
         </p>
-        <div className="nights-grid">
+        <div className="nights-row">
           {NINE_NIGHTS.map((night, i) => (
             <button
               key={night.n}
               type="button"
-              className={`night-card ${activeNight === i ? "expanded" : ""}`}
+              className={`night-chip ${activeNight === i ? "active" : ""}`}
               style={{ "--night-color": night.color }}
               onClick={() => setActiveNight(i)}
             >
-              <span className="night-number">{night.n}</span>
-              <span className="night-goddess">{night.goddess}</span>
-              {activeNight === i && (
-                <span className="night-detail">
-                  <em>{night.meaning}</em>
-                  {night.desc}
-                </span>
-              )}
+              <span className="night-chip-num">{night.n}</span>
+              {night.goddess}
             </button>
           ))}
+        </div>
+        <div className="night-detail-panel" style={{ "--night-color": NINE_NIGHTS[activeNight].color }}>
+          <span className="night-detail-goddess">{NINE_NIGHTS[activeNight].goddess}</span>
+          <em>{NINE_NIGHTS[activeNight].meaning}</em>
+          <p>{NINE_NIGHTS[activeNight].desc}</p>
         </div>
       </section>
 
