@@ -8,6 +8,8 @@ import { useAuth } from "../AuthContext";
 // Local dev overrides this via client/.env.development -> VITE_API_BASE=http://localhost:4000
 const API_BASE = import.meta.env.VITE_API_BASE || "";
 
+const TIER_COLORS = ["#ffb020", "#ff5d78", "#8b5cf6", "#2dd4bf", "#e0449c"];
+
 function loadRazorpayScript() {
   return new Promise((resolve) => {
     if (window.Razorpay) return resolve(true);
@@ -43,8 +45,10 @@ export default function Tickets() {
     }
   }, [user]);
 
+  const selectedIndex = tickets.findIndex((t) => t.id === selected);
   const selectedTicket = tickets.find((t) => t.id === selected);
   const total = selectedTicket ? selectedTicket.price * quantity : 0;
+  const tierColor = TIER_COLORS[selectedIndex % TIER_COLORS.length] || TIER_COLORS[0];
 
   async function handleCheckout(e) {
     e.preventDefault();
@@ -136,11 +140,12 @@ export default function Tickets() {
       </p>
 
       <div className="ticket-options">
-        {tickets.map((t) => (
+        {tickets.map((t, i) => (
           <button
             key={t.id}
             type="button"
             className={`ticket-card ${selected === t.id ? "selected" : ""}`}
+            style={{ "--tier-color": TIER_COLORS[i % TIER_COLORS.length] }}
             onClick={() => setSelected(t.id)}
           >
             <span className="ticket-card-check" aria-hidden="true">
@@ -161,7 +166,11 @@ export default function Tickets() {
           </Link>
         </div>
       ) : (
-        <form className="checkout-form" onSubmit={handleCheckout}>
+        <form
+          className="checkout-form"
+          style={{ "--tier-color": tierColor }}
+          onSubmit={handleCheckout}
+        >
           {selectedTicket && (
             <div className="booking-summary">
               <div>

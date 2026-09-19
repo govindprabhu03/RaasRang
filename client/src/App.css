@@ -1170,46 +1170,52 @@ body {
 }
 
 .ticket-card {
+  --tier-color: var(--gold);
   position: relative;
-  background: linear-gradient(160deg, var(--surface), var(--bg-alt));
-  border: 1px solid var(--line);
-  border-radius: var(--radius);
-  padding: 1.9rem 1.7rem;
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-top: 3px solid var(--tier-color);
+  border-radius: 22px;
+  padding: 2rem 1.8rem;
   text-align: left;
   color: var(--text);
   cursor: pointer;
-  transition: border-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+  box-shadow: 0 16px 44px -30px rgba(0, 0, 0, 0.6);
+  transition: border-color 0.25s ease, transform 0.25s cubic-bezier(0.2, 0.8, 0.2, 1),
+    box-shadow 0.25s ease;
 }
 
 .ticket-card:hover {
-  transform: translateY(-4px);
-  border-color: rgba(255, 209, 102, 0.5);
+  transform: translateY(-6px);
 }
 
 .ticket-card.selected {
-  border-color: var(--gold);
-  box-shadow: 0 0 0 1px var(--gold), 0 20px 40px -20px rgba(255, 209, 102, 0.4);
+  border-color: var(--tier-color);
+  box-shadow: 0 0 0 1px var(--tier-color), 0 20px 50px -24px var(--tier-color);
 }
 
 .ticket-card-check {
   position: absolute;
-  top: 1rem;
-  right: 1rem;
-  width: 22px;
-  height: 22px;
+  top: 1.2rem;
+  right: 1.2rem;
+  width: 24px;
+  height: 24px;
   border-radius: 50%;
-  border: 1px solid var(--line);
+  border: 1px solid rgba(255, 255, 255, 0.2);
   display: flex;
   align-items: center;
   justify-content: center;
   font-size: 0.75rem;
-  color: var(--gold-bright);
+  color: var(--tier-color);
+  transition: background 0.2s ease, border-color 0.2s ease;
 }
 
 .ticket-card.selected .ticket-card-check {
-  background: var(--gold);
-  border-color: var(--gold);
-  color: #1a0f14;
+  background: var(--tier-color);
+  border-color: var(--tier-color);
+  color: #14100c;
 }
 
 .ticket-card h3 {
@@ -1227,7 +1233,7 @@ body {
   font-style: normal;
   font-weight: 800;
   margin: 0.2rem 0 0.8rem;
-  color: var(--gold-bright);
+  color: var(--tier-color);
 }
 
 .ticket-desc {
@@ -1240,11 +1246,11 @@ body {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 1rem 1.2rem;
+  padding: 1.1rem 1.3rem;
   margin-bottom: 0.4rem;
-  background: var(--gold-soft);
-  border: 1px solid rgba(255, 176, 32, 0.35);
-  border-radius: 10px;
+  background: color-mix(in srgb, var(--tier-color) 12%, transparent);
+  border: 1px solid color-mix(in srgb, var(--tier-color) 35%, transparent);
+  border-radius: 16px;
 }
 
 .booking-summary-label {
@@ -1265,7 +1271,7 @@ body {
 }
 
 .booking-summary-price {
-  color: var(--gold-bright);
+  color: var(--tier-color, var(--gold-bright));
   font-size: 0.88rem;
   font-weight: 600;
   white-space: nowrap;
@@ -1276,19 +1282,20 @@ body {
   align-items: center;
   gap: 0;
   width: fit-content;
-  border: 1px solid var(--line);
-  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 999px;
   overflow: hidden;
+  background: rgba(255, 255, 255, 0.04);
 }
 
 .qty-stepper input {
   width: 56px;
   text-align: center;
   border: none;
-  border-left: 1px solid var(--line);
-  border-right: 1px solid var(--line);
+  border-left: 1px solid rgba(255, 255, 255, 0.14);
+  border-right: 1px solid rgba(255, 255, 255, 0.14);
   border-radius: 0;
-  background: rgba(255, 255, 255, 0.03);
+  background: transparent;
   color: var(--text);
   -moz-appearance: textfield;
 }
@@ -1300,8 +1307,8 @@ body {
 }
 
 .qty-btn {
-  width: 40px;
-  height: 42px;
+  width: 42px;
+  height: 44px;
   border: none;
   background: transparent;
   color: var(--text);
@@ -1311,20 +1318,23 @@ body {
 }
 
 .qty-btn:hover {
-  background: var(--gold-soft);
-  color: var(--gold-bright);
+  background: color-mix(in srgb, var(--tier-color, var(--gold)) 18%, transparent);
+  color: var(--tier-color, var(--gold-bright));
 }
 
 .checkout-form {
+  --tier-color: var(--gold);
   display: flex;
   flex-direction: column;
   gap: 1.4rem;
   max-width: 440px;
-  border: 1px solid var(--line);
-  border-radius: var(--radius);
-  background: linear-gradient(160deg, var(--surface), var(--bg-alt));
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 26px;
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
   padding: 2.4rem;
-  box-shadow: 0 20px 50px -25px rgba(0, 0, 0, 0.6);
+  box-shadow: 0 24px 60px -30px rgba(0, 0, 0, 0.6);
 }
 
 .checkout-form label {
@@ -1342,9 +1352,9 @@ body {
 .checkout-form textarea,
 .checkout-form select {
   padding: 0.85rem 1rem;
-  border-radius: 10px;
-  border: 1px solid var(--line);
-  background: rgba(255, 255, 255, 0.03);
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  background: rgba(255, 255, 255, 0.04);
   color: var(--text);
   font-size: 0.98rem;
   font-family: var(--font-body);
@@ -1354,15 +1364,15 @@ body {
 
 .checkout-form input:hover,
 .checkout-form textarea:hover {
-  border-color: rgba(255, 209, 102, 0.4);
+  border-color: color-mix(in srgb, var(--tier-color) 45%, transparent);
 }
 
 .checkout-form input:focus,
 .checkout-form textarea:focus {
   outline: none;
-  border-color: var(--gold);
-  background: rgba(255, 255, 255, 0.05);
-  box-shadow: 0 0 0 3px var(--gold-soft);
+  border-color: var(--tier-color);
+  background: rgba(255, 255, 255, 0.06);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--tier-color) 18%, transparent);
 }
 
 .checkout-form input[type="number"] {
@@ -1521,7 +1531,7 @@ body {
   font-weight: 800;
   letter-spacing: 0;
   text-transform: none;
-  color: var(--gold-bright);
+  color: var(--tier-color, var(--gold-bright));
 }
 
 .checkout-status.error {
@@ -1611,12 +1621,18 @@ body {
 
 .auth-gate {
   max-width: 440px;
-  text-align: left;
+  text-align: center;
+  align-items: center;
 }
 
 .auth-gate p {
   color: var(--text-dim);
-  margin-bottom: 1.2rem;
+  margin: 0;
+}
+
+.auth-gate .btn {
+  width: 100%;
+  justify-content: center;
 }
 
 .my-orders {
