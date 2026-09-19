@@ -756,6 +756,13 @@ body {
   .hero-glass-card {
     border-radius: 24px;
   }
+  .hero-glass-card .hero-meta {
+    flex-direction: column;
+    gap: 6px;
+  }
+  .hero-glass-card .hero-meta .dot {
+    display: none;
+  }
 }
 
 /* ---------- marquee ticker ---------- */
