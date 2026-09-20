@@ -2,19 +2,19 @@ export const TICKET_TYPES = [
   {
     id: "stag",
     name: "Stag Pass",
-    price: 599,
+    price: 149,
     description: "Single entry — access to the full Raas Rang Navratri night.",
   },
   {
     id: "couple",
     name: "Couple Pass",
-    price: 999,
+    price: 248,
     description: "Entry for two — best value for duos.",
   },
   {
     id: "group",
     name: "Group Pass (4)",
-    price: 1799,
+    price: 546,
     description: "Entry for a group of four.",
   },
 ];
